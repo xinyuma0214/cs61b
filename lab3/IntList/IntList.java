@@ -62,6 +62,7 @@ public class IntList {
         return res;
     }
 
+
     /**
      * Returns a list equal to L with all elements squared. Non-destructive.
      */
@@ -116,6 +117,20 @@ public class IntList {
         }
 
         return q;
+    }
+    public static IntList reverse(IntList A){
+        if (A==null){
+            return null;
+        }
+        IntList returnList=new IntList(A.first,null);
+
+        while(A.rest!=null){
+            A=A.rest;
+            IntList tmp=new IntList(A.first,returnList);
+            returnList=tmp;
+        }
+
+        return returnList;
     }
 
 
