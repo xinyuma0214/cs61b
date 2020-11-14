@@ -15,5 +15,17 @@ public class TestPalindrome {
         }
         assertEquals("persiflage", actual);
     }
+    //Task 3A
+    @Test
+    public void testPalindrome(){
+        //assertFalse(palindrome.isPalindrome("cat"));
+        assertTrue(palindrome.isPalindrome("caad"));
+    }
+
+    @Test
+    public void testOffByOnePalindrome(){
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("cacd",offByOne));
+    }
 }     //
 // Uncomment this class once you've created your Palindrome class.

@@ -17,6 +17,8 @@ public class LinkedListDeque<T> implements Deque<T>{
     /** Creates an empty LinkedListDeque. */
     public LinkedListDeque(){
         sentFront = new dequenode(null,null,null);
+        sentFront.next = sentFront;
+        sentFront.prev = sentFront;
         size = 0;
 //        dequenode p = sentFront;
 //        while(p.next != null){
