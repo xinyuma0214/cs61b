@@ -1,6 +1,10 @@
 package huglife;
 
 import creatures.*;
+import huglife.Grid;
+import huglife.HugLifeAnimator;
+import huglife.StdDraw;
+import huglife.In;
 
 /**
  * World facing class for HugLife simulator.
@@ -68,7 +72,7 @@ public class HugLife {
             boolean cycleCompleted = g.tic();
             if (cycleCompleted) {
                 g.drawWorld();
-                StdDraw.show(PAUSE_TIME_PER_SIMSTEP);
+                huglife.StdDraw.show(PAUSE_TIME_PER_SIMSTEP);
                 if (GENERATE_GIF) {
                     HugLifeAnimator.saveGifFrame(cycleCount);
                 }
@@ -132,9 +136,9 @@ public class HugLife {
             int y = in.readInt();
             switch (creature) {
                 //Uncomment this when you're ready to test out your clorus class
-                //case "clorus":
-                //    h.addCreature(x, y, new Clorus(1));
-                //    break;
+                case "clorus":
+                    h.addCreature(x, y, new Clorus(1));
+                    break;
                 case "plip":
                     h.addCreature(x, y, new Plip());
                     break;
@@ -155,7 +159,7 @@ public class HugLife {
             return;
         }
         HugLife h = readWorld(args[0]);
-        // HugLife h = new HugLife(WORLD_SIZE);
+        //HugLife h = new HugLife(WORLD_SIZE);
         // h.initialize(args[0]); DON'T USE ME
 
         if (SIMULATE_BY_CYCLE) {

@@ -13,7 +13,7 @@ public abstract class Creature extends Occupant {
     /**
      * energy for this creature.
      */
-    protected double energy;
+    public double energy;
 
     /**
      * Creates a creature with the name N. The intention is that this
@@ -48,7 +48,7 @@ public abstract class Creature extends Occupant {
      * Returns an action. The creature is provided information about its
      * immediate NEIGHBORS with which to make a decision.
      */
-    public abstract Action chooseAction(Map<Direction, Occupant> neighbors);
+    public abstract huglife.Action chooseAction(Map<huglife.Direction, Occupant> neighbors);
 
     /**
      * Returns the current energy.

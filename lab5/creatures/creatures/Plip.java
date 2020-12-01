@@ -5,10 +5,13 @@ import huglife.Direction;
 import huglife.Action;
 import huglife.Occupant;
 
+
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
+
+import static huglife.HugLifeUtils.randomEntry;
 
 /**
  * An implementation of a motile pacifist photosynthesizer.
@@ -29,6 +32,10 @@ public class Plip extends Creature {
      * blue color.
      */
     private int b;
+    /**
+     * when meet a clorus.
+     */
+    private double moveProbability = 0.5;
 
     /**
      * creates plip with energy equal to E.
@@ -57,7 +64,10 @@ public class Plip extends Creature {
      * that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
+        r = 99;
+        b = 76;
+        g = 96 * (int)energy + 63;
+
         return color(r, g, b);
     }
 
@@ -74,15 +84,20 @@ public class Plip extends Creature {
      * private static final variable. This is not required for this lab.
      */
     public void move() {
-        // TODO
+        this.energy -= 0.15;
+        if (energy < 0){
+            energy = 0;
+        }
     }
-
 
     /**
      * Plips gain 0.2 energy when staying due to photosynthesis.
      */
     public void stay() {
-        // TODO
+        this.energy += 0.2;
+        if (energy > 2.0){
+            energy = 2.0;
+        }
     }
 
     /**
@@ -91,7 +106,13 @@ public class Plip extends Creature {
      * Plip.
      */
     public Plip replicate() {
-        return this;
+        energy = 0.5 * energy;
+        Plip littlePlip = new Plip();
+        littlePlip.energy = 0.5 * energy;
+        return littlePlip;
+//        energy = energy * 0.5;
+//        double babyEnergy = energy;
+//        return new Plip(babyEnergy);
     }
 
     /**
@@ -114,17 +135,36 @@ public class Plip extends Creature {
         // TODO
         // (Google: Enhanced for-loop over keys of NEIGHBORS?)
         // for () {...}
-
-        if (false) { // FIXME
-            // TODO
+        for(Direction d: neighbors.keySet()){
+            Occupant name = neighbors.get(d);
+            if (neighbors.get(d).name().equals("empty")){
+                emptyNeighbors.addLast(d);
+            }else if (neighbors.get(d).name().equals("Cloruses")){
+                anyClorus = true;
+            }
+        }
+        if(emptyNeighbors.size() == 0){
+            return new Action(Action.ActionType.STAY);
+            //FIX ME
+            //TODO
         }
 
         // Rule 2
         // HINT: randomEntry(emptyNeighbors)
+        if (energy >= 1){
+            return new Action(Action.ActionType.REPLICATE,randomEntry(emptyNeighbors));
+
+        }
 
         // Rule 3
+        if (anyClorus && Math.random() < moveProbability) {
+            return new Action(Action.ActionType.MOVE,randomEntry(emptyNeighbors));
+
+        }
+
 
         // Rule 4
-        return new Action(Action.ActionType.STAY);
+
+         return new Action(Action.ActionType.STAY);
     }
 }

@@ -3,6 +3,7 @@ package huglife;
 import java.awt.Color;
 import java.util.Map;
 import java.util.List;
+import huglife.Action;
 
 /**
  * Example of a creature you might create for your world.
@@ -98,7 +99,7 @@ public class SampleCreature extends Creature {
      * random information.
      */
     public void stay() {
-        r += HugLifeUtils.randomInt(-colorShift, colorShift);
+        r += huglife.HugLifeUtils.randomInt(-colorShift, colorShift);
         r = Math.min(r, 255);
         r = Math.max(r, 0);
     }
