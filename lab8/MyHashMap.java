@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -11,11 +12,15 @@ public class MyHashMap<K,V> implements Map61B<K,V>{
         this(initialSize,0.75);
     }
     public MyHashMap(int initialSize, double loadFactor){
-        keySet() = new HashSet<>();
+        keys = new HashSet<>();
+        numofBucket = initialSize;
+        for(int i = 0; i < numofBucket; i++){
 
+        }
     }
     private int numofBucket;
-    //private i
+    private HashSet<K> keys;
+    private ArrayList<>
     @Override
     public void clear() {
 
